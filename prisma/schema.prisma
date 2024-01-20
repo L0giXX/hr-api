@@ -7,61 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id   String  @id @default(auto()) @map("_id") @db.ObjectId
-  name String?
-}
-
 // Define the Employee entity
 model Employee {
-  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   firstName    String
   lastName     String
-  email        String     @unique
+  email        String   @unique
   phone        String?
-  hireDate     DateTime   @default(now())
+  hireDate     DateTime @default(now())
   passwordHash String
-  isAdmin      Boolean    @default(false)
-  department   Department @relation(fields: [departmentId], references: [id])
-  role         Role       @relation(fields: [roleId], references: [id])
-  tasks        Task[]
-  leaves       Leave[]
-  departmentId String     @db.ObjectId
-  roleId       String     @db.ObjectId
+  isAdmin      Boolean  @default(false)
+  // department   Department @relation(fields: [departmentId], references: [id])
+  // role         Role       @relation(fields: [roleId], references: [id])
+  // departmentId String     @db.ObjectId
+  // roleId       String     @db.ObjectId
+  department   String
+  role         String
 }
 
 // Define the Department entity
-model Department {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  employees Employee[]
-}
+// model Department {
+//   id        String     @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String
+//   employees Employee[]
+// }
 
-// Define the Role entity
-model Role {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  employees Employee[]
-}
-
-// Define the Task entity
-model Task {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String?
-  dueDate     DateTime?
-  isCompleted Boolean   @default(false)
-  employee    Employee  @relation(fields: [employeeId], references: [id])
-  employeeId  String    @db.ObjectId
-}
-
-// Define the Leave entity
-model Leave {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  startDate  DateTime
-  endDate    DateTime
-  reason     String
-  isApproved Boolean  @default(false)
-  employee   Employee @relation(fields: [employeeId], references: [id])
-  employeeId String   @db.ObjectId
-}
+// // Define the Role entity
+// model Role {
+//   id        String     @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String
+//   employees Employee[]
+// }

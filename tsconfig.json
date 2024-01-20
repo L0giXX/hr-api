@@ -21,6 +21,6 @@
 
     "paths": {
       "@utils/*": ["./src/utils/*"]
-    }
+    },
   }
 }
