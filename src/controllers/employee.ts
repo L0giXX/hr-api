@@ -1,6 +1,7 @@
 import { prisma } from "@utils/prisma";
+import { type Employee, employeeSchema } from "@utils/types";
 import type { Request, Response } from "express";
-import { employeeSchema, type Employee } from "@utils/types";
+
 import Controller from ".";
 
 export default class EmployeeController extends Controller {

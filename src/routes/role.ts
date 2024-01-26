@@ -1,4 +1,5 @@
 import express from "express";
+
 import RoleController from "../controllers/role";
 
 const router = express.Router();

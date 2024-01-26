@@ -1,7 +1,8 @@
 import express from "express";
+
+import departmentRouter from "./routes/department";
 import employeeRouter from "./routes/employee";
 import roleRouter from "./routes/role";
-import departmentRouter from "./routes/department";
 
 const app = express();
 app.use(express.json());

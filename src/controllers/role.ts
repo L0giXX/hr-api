@@ -1,6 +1,7 @@
 import { prisma } from "@utils/prisma";
+import { type Role, roleSchema } from "@utils/types";
 import type { Request, Response } from "express";
-import { roleSchema, type Role } from "@utils/types";
+
 import Controller from ".";
 
 export default class RoleController extends Controller {

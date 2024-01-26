@@ -1,11 +1,16 @@
 import { prisma } from "@utils/prisma";
+import { type Department, departmentSchema } from "@utils/types";
 import type { Request, Response } from "express";
-import { departmentSchema, type Department } from "@utils/types";
+
 import Controller from ".";
 
 export default class DepartmentController extends Controller {
   async create(req: Request, res: Response): Promise<void> {
-    const department = Controller.validate(departmentSchema, req, res) as Department;
+    const department = Controller.validate(
+      departmentSchema,
+      req,
+      res,
+    ) as Department;
 
     const newDepartment = await prisma.department.create({
       data: {
@@ -31,7 +36,11 @@ export default class DepartmentController extends Controller {
 
   async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const department = Controller.validate(departmentSchema, req, res) as Department;
+    const department = Controller.validate(
+      departmentSchema,
+      req,
+      res,
+    ) as Department;
 
     const updatedDepartment = await prisma.department.update({
       where: { id },
