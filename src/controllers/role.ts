@@ -1,23 +1,49 @@
 import { prisma } from "@utils/prisma";
 import type { Request, Response } from "express";
 import { roleSchema, type Role } from "@utils/types";
-import validation from "@utils/validation";
+import Controller from ".";
 
-const createRole = async (req: Request, res: Response) => {
-  const role = validation(roleSchema)(req, res) as Role;
+export default class RoleController extends Controller {
+  async create(req: Request, res: Response): Promise<void> {
+    const role = Controller.validate(roleSchema, req, res) as Role;
+    const newRole = await prisma.role.create({
+      data: {
+        name: role.name,
+      },
+    });
+    res.json(newRole);
+  }
 
-  const newRole = await prisma.role.create({
-    data: {
-      name: role.name,
-    },
-  });
+  async getAll(req: Request, res: Response): Promise<void> {
+    const roles = await prisma.role.findMany();
+    res.json(roles);
+  }
 
-  res.json(newRole);
-};
+  async get(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const role = await prisma.role.findUnique({
+      where: { id },
+    });
+    res.json(role);
+  }
 
-const getRoles = async (req: Request, res: Response) => {
-  const roles = await prisma.role.findMany();
-  res.json(roles);
-};
+  async update(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const role = Controller.validate(roleSchema, req, res) as Role;
+    const updatedRole = await prisma.role.update({
+      where: { id },
+      data: {
+        name: role.name,
+      },
+    });
+    res.json(updatedRole);
+  }
 
-export { createRole, getRoles };
+  async delete(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const role = await prisma.role.delete({
+      where: { id },
+    });
+    res.json(role);
+  }
+}
