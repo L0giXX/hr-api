@@ -9,5 +9,14 @@ export const employeeSchema = z.object({
   department: z.string(),
   role: z.string(),
 });
-
 export type Employee = z.infer<typeof employeeSchema>;
+
+export const departmentSchema = z.object({
+  name: z.string(),
+});
+export type Department = z.infer<typeof departmentSchema>;
+
+export const roleSchema = z.object({
+  name: z.string(),
+});
+export type Role = z.infer<typeof roleSchema>;

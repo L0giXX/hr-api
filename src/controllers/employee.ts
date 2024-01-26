@@ -13,12 +13,33 @@ const createEmployee = async (req: Request, res: Response) => {
       email: employee.email,
       phone: employee.phone,
       passwordHash: employee.passwordHash,
-      department: employee.department,
-      role: employee.role,
+      role: { connect: { name: employee.role } },
+      department: { connect: { name: employee.department } },
     },
   });
 
+  if (!newEmployee) {
+    return res.status(500).json({ error: "Employee not created" });
+  }
   res.json(newEmployee);
 };
 
-export { createEmployee };
+const getEmployees = async (req: Request, res: Response) => {
+  const employees = await prisma.employee.findMany();
+  res.json(employees);
+};
+
+const getEmployee = async (req: Request, res: Response) => {
+  const employee = await prisma.employee.findUnique({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.json(employee);
+};
+
+const deleteEmployees = async (req: Request, res: Response) => {
+  await prisma.employee.deleteMany();
+  res.json("all employees deleted");
+};
+export { createEmployee, getEmployees, deleteEmployees };
