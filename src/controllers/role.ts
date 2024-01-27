@@ -16,7 +16,11 @@ export default class RoleController extends Controller {
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
-    const roles = await prisma.role.findMany();
+    const roles = await prisma.role.findMany({
+      include: {
+        employees: true,
+      }
+    })
     res.json(roles);
   }
 

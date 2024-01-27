@@ -22,7 +22,11 @@ export default class DepartmentController extends Controller {
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
-    const departments = await prisma.department.findMany();
+    const departments = await prisma.department.findMany({
+      include: {
+        employees: true,
+      },
+    });
     res.json(departments);
   }
 
