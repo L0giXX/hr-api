@@ -1,5 +1,6 @@
 import express from "express";
 
+import benefitRouter from "./routes/benefit";
 import companyRouter from "./routes/company";
 import departmentRouter from "./routes/department";
 import employeeRouter from "./routes/employee";
@@ -24,4 +25,5 @@ app.use(
   companyRouter,
   projectRouter,
   salaryRouter,
+  benefitRouter,
 );

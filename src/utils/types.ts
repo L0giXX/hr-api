@@ -1,4 +1,4 @@
-import { PriorityTypes, TodoStates } from "@prisma/client";
+import { BenefitTypes, PriorityTypes, TodoStates } from "@prisma/client";
 import { z } from "zod";
 
 export const employeeSchema = z.object({
@@ -6,7 +6,6 @@ export const employeeSchema = z.object({
   lastName: z.string(),
   email: z.string(),
   phone: z.string().nullable(),
-  hireDate: z.date(),
   passwordHash: z.string(),
   isAdmin: z.boolean(),
   companyId: z.string(),
@@ -74,7 +73,7 @@ export const leaveRequestSchema = z.object({
 });
 
 export const benefitSchema = z.object({
-  name: z.string(),
+  name: z.nativeEnum(BenefitTypes),
   description: z.string(),
-  converage: z.number(),
+  coverage: z.number(),
 });
