@@ -1,5 +1,6 @@
+import type { Role } from "@prisma/client";
 import { prisma } from "@utils/prisma";
-import { type Role, roleSchema } from "@utils/types";
+import { roleSchema } from "@utils/types";
 import type { Request, Response } from "express";
 
 import Controller from ".";
@@ -19,8 +20,8 @@ export default class RoleController extends Controller {
     const roles = await prisma.role.findMany({
       include: {
         employees: true,
-      }
-    })
+      },
+    });
     res.json(roles);
   }
 

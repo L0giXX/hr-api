@@ -1,5 +1,6 @@
+import type { Employee } from "@prisma/client";
 import { prisma } from "@utils/prisma";
-import { type Employee, employeeSchema } from "@utils/types";
+import { employeeSchema } from "@utils/types";
 import type { Request, Response } from "express";
 
 import Controller from ".";
@@ -12,14 +13,14 @@ export default class EmployeeController extends Controller {
         firstName: employee.firstName,
         lastName: employee.lastName,
         email: employee.email,
-        phone: employee.phone!,
+        phone: employee.phone,
         passwordHash: employee.passwordHash,
         isAdmin: employee.isAdmin,
-        company: { connect: { name: employee.company } },
-        department: { connect: { name: employee.department } },
-        role: { connect: { name: employee.role } },
-        project: { connect: { name: employee.project! } },
-        benefit: { connect: { id: employee.benefit! } },
+        company: { connect: { name: employee.companyId } },
+        department: { connect: { name: employee.departmentId } },
+        role: { connect: { name: employee.roleId } },
+        project: { connect: { name: employee.projectId! } },
+        benefit: { connect: { id: employee.benefitId! } },
       },
     });
     res.json(newEmployee);
@@ -47,14 +48,14 @@ export default class EmployeeController extends Controller {
         firstName: employee.firstName,
         lastName: employee.lastName,
         email: employee.email,
-        phone: employee.phone!,
+        phone: employee.phone,
         passwordHash: employee.passwordHash,
         isAdmin: employee.isAdmin,
-        company: { connect: { name: employee.company } },
-        department: { connect: { name: employee.department } },
-        role: { connect: { name: employee.role } },
-        project: { connect: { name: employee.project! } },
-        benefit: { connect: { id: employee.benefit! } },
+        company: { connect: { name: employee.companyId } },
+        department: { connect: { name: employee.departmentId } },
+        role: { connect: { name: employee.roleId } },
+        project: { connect: { name: employee.projectId! } },
+        benefit: { connect: { id: employee.benefitId! } },
       },
     });
     res.json(updatedEmployee);

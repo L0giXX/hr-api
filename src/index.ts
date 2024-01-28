@@ -5,6 +5,7 @@ import departmentRouter from "./routes/department";
 import employeeRouter from "./routes/employee";
 import projectRouter from "./routes/project";
 import roleRouter from "./routes/role";
+import salaryRouter from "./routes/salary";
 
 const app = express();
 app.use(express.json());
@@ -22,4 +23,5 @@ app.use(
   departmentRouter,
   companyRouter,
   projectRouter,
+  salaryRouter,
 );

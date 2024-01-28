@@ -1,5 +1,6 @@
+import type { Company } from "@prisma/client";
 import { prisma } from "@utils/prisma";
-import { type Company, companySchema } from "@utils/types";
+import { companySchema } from "@utils/types";
 import type { Request, Response } from "express";
 
 import Controller from ".";
