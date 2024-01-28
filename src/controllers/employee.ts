@@ -12,10 +12,14 @@ export default class EmployeeController extends Controller {
         firstName: employee.firstName,
         lastName: employee.lastName,
         email: employee.email,
-        phone: employee.phone,
+        phone: employee.phone!,
         passwordHash: employee.passwordHash,
-        role: { connect: { name: employee.role } },
+        isAdmin: employee.isAdmin,
+        company: { connect: { name: employee.company } },
         department: { connect: { name: employee.department } },
+        role: { connect: { name: employee.role } },
+        project: { connect: { name: employee.project! } },
+        benefit: { connect: { id: employee.benefit! } },
       },
     });
     res.json(newEmployee);
@@ -43,10 +47,14 @@ export default class EmployeeController extends Controller {
         firstName: employee.firstName,
         lastName: employee.lastName,
         email: employee.email,
-        phone: employee.phone,
+        phone: employee.phone!,
         passwordHash: employee.passwordHash,
-        role: { connect: { name: employee.role } },
+        isAdmin: employee.isAdmin,
+        company: { connect: { name: employee.company } },
         department: { connect: { name: employee.department } },
+        role: { connect: { name: employee.role } },
+        project: { connect: { name: employee.project! } },
+        benefit: { connect: { id: employee.benefit! } },
       },
     });
     res.json(updatedEmployee);
