@@ -1,4 +1,9 @@
-import { BenefitTypes, PriorityTypes, TodoStates } from "@prisma/client";
+import {
+  BenefitTypes,
+  PriorityTypes,
+  ProjectStates,
+  TodoStates,
+} from "@prisma/client";
 import { z } from "zod";
 
 export const employeeSchema = z.object({
@@ -44,7 +49,7 @@ export const projectSchema = z.object({
   name: z.string(),
   description: z.string(),
   priority: z.nativeEnum(PriorityTypes),
-  state: z.nativeEnum(TodoStates),
+  state: z.nativeEnum(ProjectStates),
   start_date: z.date(),
   end_date: z.date(),
 });
@@ -56,7 +61,7 @@ export const todoSchema = z.object({
   state: z.string(),
   startDate: z.string(),
   endDate: z.string(),
-  projectId: z.string(),
+  projectId: z.string().nullable(),
 });
 
 export const attendanceSchema = z.object({
